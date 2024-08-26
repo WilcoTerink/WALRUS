@@ -96,7 +96,7 @@ WALRUS_calibrate = function(name, samplesize=1000, selectionsize=10,
   parID   = c("cW","cG"   ,"cQ","cV","cS" ,"cD" )[fit_T]
   parmean = c(cW  , cG/1e6, cQ , cV , cS  , cD  )[fit_T]
   parsd   = c(100 , 20    , 20 , 10 , 1   , 250 )[fit_T]
-  parmin  = c(1   , 0.1   , 1  , 1  , 3   , 1000)[fit_T]
+  parmin  = c(1   , 0.1   , 1  , 1  , 1   , 1000)[fit_T]
   parmax  = c(450 , 100   , 150, 50 , 6   , 2500)[fit_T]
   
   # make sample
