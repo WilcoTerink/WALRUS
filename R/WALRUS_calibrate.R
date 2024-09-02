@@ -130,11 +130,21 @@ WALRUS_calibrate = function(name, samplesize=1000, selectionsize=10,
     # run WALRUS
     modeled    = WALRUS_loop(pars=parameters)
 
-    #print(length(Qobs_forNS))
-    #print(length(modeled$Q))
-    
+    ### Added by Wilco to only use real values for calibration and not interpolated ones
+    calibFrame['Qsim'] = modeled$Q
+    # Remove the NaN rows
+    optFrame = na.omit(calibFrame)
+    # print(nrow(optFrame))
+    myQsim = optFrame$Qsim
+    myQobs = optFrame$Q
+
     # Compute and store the mean sum of squares.
-    LHS$SS[i]  = mean((Qobs_forNS-modeled$Q)^2)
+    LHS$SS[i]  = mean((myQobs-myQsim)^2)
+    ####### Till here
+
+    
+    # # Compute and store the mean sum of squares.
+    # LHS$SS[i]  = mean((Qobs_forNS-modeled$Q)^2)
   }
   
   # Write the results to file: parameter values and belonging sum of squares.
