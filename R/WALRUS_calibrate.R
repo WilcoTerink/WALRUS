@@ -186,7 +186,18 @@ WALRUS_calibrate = function(name, samplesize=1000, selectionsize=10,
                           cV=cV_optim, cS=cS_optim, cD=cD_optim, 
                           aS=aS, st=st, Gfrac=Gfrac)    
     mod = WALRUS_loop(pars=fit_pars)
-    return(Qobs_forNS - mod$Q)
+
+    ### Added by Wilco to only use real values for calibration and not interpolated ones
+    calibFrame['Qsim'] = mod$Q
+    # Remove the NaN rows
+    optFrame = na.omit(calibFrame)
+    myQsim = optFrame$Qsim
+    myQobs = optFrame$Q
+    
+    return(myQobs-myQsim)
+    ##### Till here
+
+    # return(Qobs_forNS - mod$Q)
   }
   
   
